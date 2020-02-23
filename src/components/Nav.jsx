@@ -16,6 +16,12 @@ const Nav = () => (
     >
       Task Two
     </NavLink>
+    <NavLink
+      activeClassName="active"
+      to="/todos"
+    >
+      Todos
+    </NavLink>
   </nav>
 );
 
