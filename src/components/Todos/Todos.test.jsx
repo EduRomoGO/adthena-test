@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, getByTestId, wait } from '@testing-library/react';
 import Todos from './Todos.jsx';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ afterEach(() => {
 
 
 describe('Todos', () => {
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const users = [{
       "id": 1,
       "name": "Leanne Graham",
@@ -33,9 +33,13 @@ describe('Todos', () => {
 
     axios.get.mockResolvedValueOnce(users);
 
-    const { getByRole } = render(<Todos />);
+    const { getByRole, queryByTestId, getByTestId } = render(<Todos />);
 
+    expect(getByTestId('loader')).toBeInTheDocument();
     expect(axios.get).toHaveBeenCalledTimes(1);
+
+    await wait();
+    expect(queryByTestId('loader')).toBeNull();
 
     expect(getByRole('heading').textContent).toBe('Todos App');
   });
