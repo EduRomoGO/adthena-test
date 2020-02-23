@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --mode development",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "7.2.0",
@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.5.5",
+    "@testing-library/react": "^9.4.1",
     "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.8.0",
