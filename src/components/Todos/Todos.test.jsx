@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React from 'react';
-import { render, cleanup, getByTestId, wait } from '@testing-library/react';
+import { render, cleanup, wait } from '@testing-library/react';
 import Todos from './Todos.jsx';
 import axios from 'axios';
+import '@testing-library/jest-dom';
 
 jest.mock('axios');
 
@@ -31,16 +32,22 @@ describe('Todos', () => {
       "website": "liz.com",
     }];
 
-    axios.get.mockResolvedValueOnce(users);
+    axios.get.mockResolvedValueOnce({ data: users});
 
     const { getByRole, queryByTestId, getByTestId } = render(<Todos />);
+    // const loading = queryByTestId('loader');
 
-    expect(getByTestId('loader')).toBeInTheDocument();
+    expect(queryByTestId('loader')).toBeInTheDocument();
+
+    expect(getByRole('heading').textContent).toBe('Todos App');
+
+
     expect(axios.get).toHaveBeenCalledTimes(1);
+
+    // await waitForElement(() => getByTestId('loader'));
+    // expect(getByTestId('loader')).toBeInTheDocument();
 
     await wait();
     expect(queryByTestId('loader')).toBeNull();
-
-    expect(getByRole('heading').textContent).toBe('Todos App');
   });
 });
