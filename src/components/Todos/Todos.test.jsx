@@ -4,6 +4,7 @@ import { render, cleanup, wait, getByText } from '@testing-library/react';
 import Todos from './Todos.jsx';
 import axios from 'axios';
 import '@testing-library/jest-dom';
+import { USERS_URL } from '../../utils/constants.js'
 
 jest.mock('axios');
 
@@ -41,6 +42,7 @@ describe('Todos', () => {
     expect(getByRole('heading').textContent).toBe('Todos App');
 
     expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith(USERS_URL);
 
     await wait();
     expect(queryByTestId('loader')).toBeNull();

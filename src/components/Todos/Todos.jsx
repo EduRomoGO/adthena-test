@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React from 'react';
-import useFetch from './useFetch.js';
+import { useFetch } from './useFetch.js';
+import { USERS_URL } from '../../utils/constants.js'
 
 const Todos = () => {
-  const [users, isLoading, isError] = useFetch('https://jsonplaceholder.typicode.com/users');
+  const [users, isLoading, isError] = useFetch(USERS_URL);
   const renderError = () => {
     return <div>Something went wrong...</div>;
   }
