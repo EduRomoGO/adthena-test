@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { render, cleanup, wait } from '@testing-library/react';
+import { render, cleanup, wait, getByText } from '@testing-library/react';
 import Todos from './Todos.jsx';
 import axios from 'axios';
 import '@testing-library/jest-dom';
@@ -35,19 +35,24 @@ describe('Todos', () => {
     axios.get.mockResolvedValueOnce({ data: users});
 
     const { getByRole, queryByTestId, getByTestId } = render(<Todos />);
-    // const loading = queryByTestId('loader');
 
     expect(queryByTestId('loader')).toBeInTheDocument();
 
     expect(getByRole('heading').textContent).toBe('Todos App');
 
-
     expect(axios.get).toHaveBeenCalledTimes(1);
-
-    // await waitForElement(() => getByTestId('loader'));
-    // expect(getByTestId('loader')).toBeInTheDocument();
 
     await wait();
     expect(queryByTestId('loader')).toBeNull();
+  });
+
+  it('should render error state if an error occured', async () => {
+    axios.get.mockRejectedValueOnce({ status: 500 });
+
+    const { findByText } = render(<Todos />);
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(await findByText('Something went wrong...')).toBeInTheDocument();
   });
 });
