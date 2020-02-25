@@ -1,49 +1,18 @@
-Adthena Test Client
-================
+# Adthena test
 
-### Prerequisites
+## Usage instructions 
 
-> NOTE: These will already be installed if you choose to use a laptop provided by us.
+Clone the repo --> `git clone https://github.com/EduRomoGO/adthena-test.git`  
+Install the dependencies --> `npm i`  
+Start the local server --> `npm start`  
 
-1. Install nvm:
-    ```
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-    ```
-2. Ensure nvm is installed:
-    ```
-    nvm --version
-    ```
-3. Install node:
-    ```
-    nvm install node
-    ```
-4. Ensure node is installed:
-    ```
-    nvm use node
-    ```
 
-This is a simple client created using ReactJS in (ECMAScript 6) using babel.
+## Comments
 
-### How to Run It
+I would have asked questions about the UI, for instance, if the search input should perform the search after typing, or add a search button, if the theme selection should persist, etc, but I haven't had the time to do it during the week, and I would like to deliver during the weekend, so I had to make assumptions. I hope you understand it.
 
-You can run the application from command line or using an IDE (VS Code is available on the laptop we
-provide).
+I have disabled eslint cause I am not used to this set of rules and I don't wan't to spend time on it
 
-#### Running from Command Line
+I have created the app in the Todos Tab inside the Nav
 
-1. Make sure you are inside the `test-client` folder.
-2. First you will need to install the npm dependencies:
-    ```
-    npm install
-    ```
-3. Run tests:
-    ```
-    npm test
-    ```    
-4. Run using npm:
-    ```
-    npm start
-    ```
-5. Your client will be available on port 8082. Go to **http://127.0.0.1:8082/** to test it.
-   
-6. You can stop the client using `Ctrl + C`. If you need to use the console for something else, you should open a new terminal tab or window.
+I have also assumed that the data needs to be fetched from each endpoint and then the search looks into that downloaded data
