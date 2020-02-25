@@ -3,9 +3,12 @@ import axios from 'axios';
 
 export const useFetch = (url) => {
   const [data, setData] = useState([]);
+  const [isComponentUnmounted, setIsComponentUnmounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   useEffect(() => {
+    setIsComponentUnmounted(false);
+
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -18,8 +21,14 @@ export const useFetch = (url) => {
       }
     };
 
-    fetchData();
-  }, [url]);
+    if (!isComponentUnmounted) {
+      fetchData();
+    }
+
+    return () => {
+      setIsComponentUnmounted(true);
+    };
+  }, [url, isComponentUnmounted]);
 
   return [data, isLoading, isError];
 };
