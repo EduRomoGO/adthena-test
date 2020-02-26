@@ -51,7 +51,8 @@ describe('Todos', () => {
     expect(axios.get).toHaveBeenCalledTimes(2);
     expect(axios.get.mock.calls[0][0]).toBe(USERS_URL);
     expect(axios.get.mock.calls[1][0]).toBe(TODOS_URL);
-    // expect(axios.get).toHaveBeenCalledWith(USERS_URL);
+
+    expect(getByRole('search')).toBeInTheDocument();
 
     await wait();
     expect(queryByTestId('loader')).toBeNull();
