@@ -9,7 +9,9 @@ const Todos = () => {
   const [completeUsers, setCompleteUsers] = useState([]);
   useEffect(() => {
     const getCompleteUsers = (userList, todoList) => {
-      return userList.map(({id, username, email, website}) => ({id, username, email, website}));
+      return userList.map(({id, username, email, website}) => {
+        return {id, username, email, website, todos: todoList.filter(item => item.userId === id)};
+      });
     }
 
     const convertData = (users, todos) => {
@@ -22,7 +24,6 @@ const Todos = () => {
     }
 
     convertData(users, todos);
-
   }, [users, todos]);
   const renderError = () => {
     return <div>Something went wrong...</div>;
