@@ -9,8 +9,8 @@ const Todos = () => {
   const [completeUsers, setCompleteUsers] = useState([]);
   useEffect(() => {
     const getCompleteUsers = (userList, todoList) => {
-      return userList.map(({id, username, email, website}) => {
-        return {id, username, email, website, todos: todoList.filter(item => item.userId === id)};
+      return userList.map(({ id, username, email, website }) => {
+        return { id, username, email, website, todos: todoList.filter(item => item.userId === id) };
       });
     }
 
@@ -30,16 +30,27 @@ const Todos = () => {
   }
 
   const renderUsers = (users) => {
-    return users ? users.map(({id, username, email, website}) => {
+    return users ? users.map(({ id, username, email, website }) => {
       return <div key={id}>{username}</div>;
     }) : '';
   }
+
+
+  const renderSearch = () => {
+    return <form id="search" role="search">
+      <label htmlFor="search-input">Search by username</label>
+      <input type="search" id="search-input" name="search" spellCheck="false" />
+      <input value="Submit" type="submit" />
+    </form>
+  }
+
 
   const isFetchingError = () => isErrorUsers || isErrorTodos;
   const isLoading = () => isLoadingUsers || isLoadingTodos;
 
   return <section>
     <header><h1>Todos App</h1></header>
+    {renderSearch()}
     {isLoading()
       ? <div data-testid='loader'>Loading...</div>
       : isFetchingError() ? renderError() : renderUsers(completeUsers)
