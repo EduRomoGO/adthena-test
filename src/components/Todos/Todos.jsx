@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 /* eslint-disable */
 import { useFetch } from './useFetch.js';
 import { USERS_URL, TODOS_URL } from '../../utils/constants.js'
@@ -6,7 +6,9 @@ import { USERS_URL, TODOS_URL } from '../../utils/constants.js'
 const Todos = () => {
   const [users, isLoadingUsers, isErrorUsers] = useFetch(USERS_URL);
   const [todos, isLoadingTodos, isErrorTodos] = useFetch(TODOS_URL);
+  const [search, setSearch] = useState('');
   const [completeUsers, setCompleteUsers] = useState([]);
+  const [userSelected, setUserSelected] = useState();
   useEffect(() => {
     const getCompleteUsers = (userList, todoList) => {
       return userList.map(({ id, username, email, website }) => {
@@ -29,18 +31,39 @@ const Todos = () => {
     return <div>Something went wrong...</div>;
   }
 
-  const renderUsers = (users) => {
-    return users ? users.map(({ id, username, email, website }) => {
-      return <div key={id}>{username}</div>;
-    }) : '';
+  const renderUserSelected = useCallback(
+    () => {
+      if (search !== '') {
+        if (userSelected && Object.keys(userSelected).length > 0) {
+          const { id, username } = userSelected;
+
+          return <div>
+            <div>User:</div>
+            <div key={id}>{username}</div>
+          </div>
+        } else {
+          return <div>No user by {search} username was found</div>
+        }
+      }
+    },
+    [userSelected],
+  );
+
+  const handleChange = e => {
+    setSearch(e.target.value);
   }
 
+
+  const handleClick = e => {
+    e.preventDefault();
+    setUserSelected(completeUsers.find(item => item.username === search) || {});
+  }
 
   const renderSearch = () => {
     return <form id="search" role="search">
       <label htmlFor="search-input">Search by username</label>
-      <input type="search" id="search-input" name="search" spellCheck="false" />
-      <input value="Submit" type="submit" />
+      <input onChange={handleChange} type="search" id="search-input" name="search" spellCheck="false" value={search} />
+      <button onClick={handleClick} type="submit" >Submit</button>
     </form>
   }
 
@@ -53,7 +76,7 @@ const Todos = () => {
     {renderSearch()}
     {isLoading()
       ? <div data-testid='loader'>Loading...</div>
-      : isFetchingError() ? renderError() : renderUsers(completeUsers)
+      : isFetchingError() ? renderError() : renderUserSelected(userSelected)
     }
   </section>;
 }

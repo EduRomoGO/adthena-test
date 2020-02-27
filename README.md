@@ -16,3 +16,5 @@ I have disabled eslint cause I am not used to this set of rules and I don't wan'
 I have created the app in the Todos Tab inside the Nav
 
 I have also assumed that the data needs to be fetched from each endpoint and then the search looks into that downloaded data
+
+I have also assumed that username is unique
