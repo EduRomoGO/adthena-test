@@ -2,6 +2,8 @@ import React, { useEffect, useCallback, useState } from 'react';
 /* eslint-disable */
 import { useFetch } from './useFetch.js';
 import { USERS_URL, TODOS_URL } from '../../utils/constants.js'
+import { CheckSquare as CheckSquareIcon, Square as SquareIcon } from '../../static/svg/all-icons.js';
+import './Todos.css';
 
 const Todos = () => {
   const [users, isLoadingUsers, isErrorUsers] = useFetch(USERS_URL);
@@ -35,11 +37,20 @@ const Todos = () => {
     () => {
       if (search !== '') {
         if (userSelected && Object.keys(userSelected).length > 0) {
-          const { id, username } = userSelected;
+          const { id, username, email, website, todos: userTodos } = userSelected;
 
           return <div>
             <div>User:</div>
-            <div key={id}>{username}</div>
+            <div>{username}</div>
+            <div>{email}</div>
+            <div>{website}</div>
+            {userTodos.map(({id, title, completed}) => {
+              return <div key={id}>
+                <div>{completed.toString()}</div>
+                {completed ? <CheckSquareIcon /> : <SquareIcon />}
+                <div>{title}</div>
+              </div>
+            })}
           </div>
         } else {
           return <div>No user by {search} username was found</div>
