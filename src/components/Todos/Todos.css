@@ -2,3 +2,11 @@
   width: 20px;
   height: 20px;
 }
+
+.c-todo {
+  display: flex;
+}
+
+.c-todo__title {
+  margin-left: 0.5rem;
+}

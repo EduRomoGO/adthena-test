@@ -44,13 +44,14 @@ const Todos = () => {
             <div>{username}</div>
             <div>{email}</div>
             <div>{website}</div>
-            {userTodos.map(({id, title, completed}) => {
-              return <div key={id}>
-                <div>{completed.toString()}</div>
-                {completed ? <CheckSquareIcon /> : <SquareIcon />}
-                <div>{title}</div>
-              </div>
-            })}
+            {userTodos
+              .sort((x, y) => x.completed ? -1 : 1)
+              .map(({ id, title, completed }) => {
+                return <div className='c-todo' key={id}>
+                  {completed ? <CheckSquareIcon /> : <SquareIcon />}
+                  <div className='c-name__title'>{title}</div>
+                </div>
+              })}
           </div>
         } else {
           return <div>No user by {search} username was found</div>
