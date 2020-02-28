@@ -1,3 +1,27 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.c-user-selected {
+  padding: 1.5rem;
+}
+
+.c-user-selected__details {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 3px;
+  border: 2px solid black;
+  margin-bottom: 1rem;
+}
+
 .check-square-svg, .square-svg {
   width: 20px;
   height: 20px;
@@ -9,4 +33,35 @@
 
 .c-todo__title {
   margin-left: 0.5rem;
+}
+
+.search-label {
+  margin-right: 1rem;
+}
+
+input {
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+.button {
+  background-color: #d08b74;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form > * {
+  flex: 1 1 0;
 }

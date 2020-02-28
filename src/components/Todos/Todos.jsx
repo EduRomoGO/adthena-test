@@ -39,17 +39,18 @@ const Todos = () => {
         if (userSelected && Object.keys(userSelected).length > 0) {
           const { id, username, email, website, todos: userTodos } = userSelected;
 
-          return <div>
-            <div>User:</div>
-            <div>{username}</div>
-            <div>{email}</div>
-            <div>{website}</div>
+          return <div className='c-user-selected'>
+            <section className='c-user-selected__details'>
+              <div>{username}</div>
+              <div>{email}</div>
+              <div>{website}</div>
+            </section>
             {userTodos
               .sort((x, y) => x.completed ? -1 : 1)
               .map(({ id, title, completed }) => {
                 return <div className='c-todo' key={id}>
                   {completed ? <CheckSquareIcon /> : <SquareIcon />}
-                  <div className='c-name__title'>{title}</div>
+                  <div className='c-todo__title'>{title}</div>
                 </div>
               })}
           </div>
@@ -73,9 +74,9 @@ const Todos = () => {
 
   const renderSearch = () => {
     return <form id="search" role="search">
-      <label htmlFor="search-input">Search by username</label>
+      <label className='search-label' htmlFor="search-input">Search by username</label>
       <input onChange={handleChange} type="search" id="search-input" name="search" spellCheck="false" value={search} />
-      <button onClick={handleClick} type="submit" >Submit</button>
+      <button className='button' onClick={handleClick} type="submit" >Submit</button>
     </form>
   }
 
